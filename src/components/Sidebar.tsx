@@ -1,15 +1,17 @@
 'use client';
 
-import { Room, ActiveView } from '@/lib/types';
-import { Home, ChevronRight } from 'lucide-react';
+import { Room, ActiveView, Scenario } from '@/lib/types';
+import { Home, ChevronRight, Zap } from 'lucide-react';
 
 interface SidebarProps {
   rooms: Room[];
   activeView: ActiveView;
   onNavigate: (view: ActiveView) => void;
+  scenarios: Scenario[];
 }
 
-export default function Sidebar({ rooms, activeView, onNavigate }: SidebarProps) {
+export default function Sidebar({ rooms, activeView, onNavigate, scenarios }: SidebarProps) {
+  const enabledScenarios = scenarios.filter((s) => s.isEnabled).length;
   const totalDevicesOn = rooms.reduce(
     (acc, room) => acc + room.devices.filter((d) => d.isOn).length,
     0
@@ -44,6 +46,23 @@ export default function Sidebar({ rooms, activeView, onNavigate }: SidebarProps)
           <Home size={16} />
           <span>Tổng Quan</span>
           {activeView === 'home' && <ChevronRight size={14} className="ml-auto" />}
+        </button>
+
+        <button
+          onClick={() => onNavigate('scenarios')}
+          className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
+            activeView === 'scenarios'
+              ? 'bg-amber-600 text-white shadow-lg shadow-amber-600/30'
+              : 'text-slate-400 hover:text-white hover:bg-slate-800'
+          }`}
+        >
+          <Zap size={16} />
+          <span className="flex-1 text-left">Kịch Bản Auto</span>
+          {enabledScenarios > 0 && (
+            <span className={`text-xs px-1.5 py-0.5 rounded-full font-semibold ${activeView === 'scenarios' ? 'bg-white/20 text-white' : 'bg-amber-500/20 text-amber-400'}`}>
+              {enabledScenarios}
+            </span>
+          )}
         </button>
 
         <div className="pt-2 pb-1">

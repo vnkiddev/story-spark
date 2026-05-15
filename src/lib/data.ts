@@ -1,4 +1,40 @@
-import { Room } from './types';
+import { Room, Scenario } from './types';
+
+export const initialScenarios: Scenario[] = [
+  {
+    id: 'lie-temp-guard',
+    name: 'Bảo Vệ Nhiệt Độ Phòng Lie',
+    description: 'Tự động tăng nhiệt độ điều hoà khi phòng Lie quá lạnh.',
+    roomId: 'phong-lie',
+    roomName: 'Phòng Lie',
+    icon: '🌡️',
+    conditionLabel: 'Nhiệt độ phòng < 24°C',
+    actionLabel: 'Tăng cài đặt điều hoà lên 1°C',
+    isEnabled: true,
+  },
+  {
+    id: 'auto-fan-khach',
+    name: 'Bật Quạt Phòng Khách Khi Nóng',
+    description: 'Tự động bật quạt phòng khách khi nhiệt độ vượt 30°C.',
+    roomId: 'phong-khach',
+    roomName: 'Phòng Khách',
+    icon: '💨',
+    conditionLabel: 'Nhiệt độ phòng > 30°C',
+    actionLabel: 'Bật quạt (tốc độ vừa)',
+    isEnabled: false,
+  },
+  {
+    id: 'humidity-alert',
+    name: 'Cảnh Báo Độ Ẩm Cao',
+    description: 'Ghi log cảnh báo khi độ ẩm bất kỳ phòng nào vượt quá 80%.',
+    roomId: null,
+    roomName: 'Tất cả phòng',
+    icon: '💧',
+    conditionLabel: 'Độ ẩm bất kỳ phòng > 80%',
+    actionLabel: 'Ghi log cảnh báo',
+    isEnabled: true,
+  },
+];
 
 export const initialRooms: Room[] = [
   {

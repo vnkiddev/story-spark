@@ -53,4 +53,24 @@ export interface Room {
   devices: Device[];
 }
 
-export type ActiveView = 'home' | string;
+export type ActiveView = 'home' | 'scenarios' | string;
+
+export interface Scenario {
+  id: string;
+  name: string;
+  description: string;
+  roomId: string | null;
+  roomName: string | null;
+  icon: string;
+  conditionLabel: string;
+  actionLabel: string;
+  isEnabled: boolean;
+}
+
+export interface ScenarioLog {
+  id: string;
+  scenarioId: string;
+  scenarioName: string;
+  message: string;
+  timestamp: Date;
+}
